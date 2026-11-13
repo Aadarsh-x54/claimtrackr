@@ -1,6 +1,8 @@
 # ClaimTrackr: AI-Powered Automated Health Insurance Claim Processing System
 
-An intelligent, end-to-end Generative AI platform designed to automate health insurance claim validation, policy compliance verification, fraud detection, and adjudication reporting. Built using **LangChain**, **OpenAI GPT-3.5**, **FAISS Vector Store**, and **Flask**.
+An intelligent, end-to-end Generative AI platform designed to automate health insurance claim validation, policy compliance verification, fraud detection, and adjudication reporting. Built using **LangChain**, **OpenAI GPT-4o-mini**, **FAISS Vector Store**, and **Flask**.
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Aadarsh-x54/claimtrackr)
 
 ---
 
