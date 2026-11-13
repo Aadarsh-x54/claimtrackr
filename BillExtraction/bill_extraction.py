@@ -3,6 +3,11 @@ from openai import OpenAI
 import yaml
 import json
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+load_dotenv(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env'))
 
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 CONFIG_PATH = os.path.join(CURRENT_DIR, "config.yaml")
@@ -41,8 +46,9 @@ def get_invoice_info_from_llm(data):
 
     messages.append({"role": "user", "content": user_content})
 
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
     response = llm.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model=model_name,
                 messages=messages,
                 temperature=0.4,
                 max_tokens=2500)

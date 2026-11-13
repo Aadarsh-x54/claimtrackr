@@ -131,8 +131,9 @@ def get_bill_info(data):
 
     messages.append({"role": "user", "content": user_content})
 
+    model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
     response = openai.chat.completions.create(
-                model="gpt-3.5-turbo",
+                model=model_name,
                 messages=messages,
                 temperature=0.4,
                 max_tokens=2500)
@@ -260,7 +261,8 @@ def msg():
         validated_prompt = check_claim_rejection(bill_info["disease"], general_exclusion_list,PROMPT)
     
         prompt_template = PromptTemplate(input_variables=["claim_approval_context","patient_info"],template=validated_prompt)
-        llm = ChatOpenAI(model="gpt-3.5-turbo")
+        model_name = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+        llm = ChatOpenAI(model=model_name)
         llmchain = LLMChain(llm=llm, prompt= prompt_template)
         output = llmchain.run({"claim_approval_context": get_claim_approval_context(), "general_exclusion_context": get_general_exclusion_context(), "patient_info": patient_info, "medical_bill_info":medical_bill_info,"max_amount":total_claim_amount, "disease":bill_info["disease"]})
         
