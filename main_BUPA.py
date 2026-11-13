@@ -277,5 +277,6 @@ def msg():
         return render_template("result.html", name=name, address=address, claim_type=claim_type, claim_reason=claim_reason, date=date, medical_facility=medical_facility, total_claim_amount=total_claim_amount, description=description, output=output)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8081)
+    port = int(os.getenv("PORT", 8081))
+    app.run(host='0.0.0.0', port=port)
 
