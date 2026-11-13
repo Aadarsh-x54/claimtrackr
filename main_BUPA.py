@@ -4,16 +4,38 @@ from flask import Flask, render_template, request
 from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader
 import openai
 from langchain_openai import ChatOpenAI
-from langchain.prompts import PromptTemplate
-from langchain.schema import Document
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+try:
+    from langchain.prompts import PromptTemplate
+except (ImportError, ModuleNotFoundError):
+    from langchain_core.prompts import PromptTemplate
+
+try:
+    from langchain.schema import Document
+except (ImportError, ModuleNotFoundError):
+    from langchain_core.documents import Document
+
+try:
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
+except (ImportError, ModuleNotFoundError):
+    try:
+        from langchain_text_splitters import RecursiveCharacterTextSplitter
+    except (ImportError, ModuleNotFoundError):
+        from langchain.text_splitter import RecursiveCharacterTextSplitter
+
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from PyPDF2 import PdfReader
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from langchain_community.document_loaders import DirectoryLoader
-from langchain.chains import LLMChain
+
+try:
+    from langchain.chains import LLMChain
+except (ImportError, ModuleNotFoundError):
+    try:
+        from langchain.chains.llm import LLMChain
+    except (ImportError, ModuleNotFoundError):
+        from langchain_classic.chains import LLMChain
 import json
 
 from dotenv import load_dotenv

@@ -33,6 +33,8 @@ def main():
         app.run(host=host, port=port, debug=False)
     except Exception as e:
         print(f"[X] Failed to launch server: {e}")
+        import traceback
+        traceback.print_exc()
         sys.exit(1)
 
 if __name__ == "__main__":
